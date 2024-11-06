@@ -81,7 +81,7 @@ const EditSchool = ({ ...others }) => {
         })}
         onSubmit={handleSubmit}
       >
-        {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
+        {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values, setFieldValue }) => (
           <form noValidate onSubmit={handleSubmit} {...others}>
             <Grid container spacing={gridSpacing}>
               {/* User Name */}
@@ -106,7 +106,9 @@ const EditSchool = ({ ...others }) => {
                   disablePortal
                   options={institues}
                   getOptionLabel={(option) => option.name}
-                  onChange={(event, value) => setSchoolData({ ...schoolData, instituteId: value?.id })}
+                  onChange={(event, newValue) => {
+                    setFieldValue("instituteId", newValue ? newValue.id : "");
+                  }}
                   renderInput={(params) => <TextField {...params} label="Class" />}
                 />
               </Grid>

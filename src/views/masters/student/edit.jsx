@@ -96,7 +96,7 @@ const EditStudent = ({ ...others }) => {
         })}
         onSubmit={handleSubmit}
       >
-        {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
+        {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values, setFieldValue }) => (
           <form noValidate onSubmit={handleSubmit} {...others}>
             <Grid container spacing={gridSpacing}>
               {/* User Name */}
@@ -219,9 +219,8 @@ const EditStudent = ({ ...others }) => {
                   value={selectedClass}
                   options={classes}
                   getOptionLabel={(option) => option.name}
-                  onChange={(event, value) => {
-                    setSelectedClass(value);
-                    setTeacherData({ ...teacherData, classId: value?.id });
+                  onChange={(event, newValue) => {
+                    setFieldValue("classId", newValue ? newValue.id : "");
                   }}
                   renderInput={(params) => <TextField {...params} label="Class" />}
                 />
@@ -234,9 +233,8 @@ const EditStudent = ({ ...others }) => {
                   value={selectedDivision}
                   options={divisions}
                   getOptionLabel={(option) => option.name}
-                  onChange={(event, value) => {
-                    setSelectedDivision(value);
-                    setTeacherData({ ...teacherData, divisionId: value?.id });
+                  onChange={(event, newValue) => {
+                    setFieldValue("divisionId", newValue ? newValue.id : "");
                   }}
                   renderInput={(params) => <TextField {...params} label="Division" />}
                 />
